@@ -11,6 +11,11 @@ class Manufactuer extends Model
 
     protected $table = 'manufactuers';
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function sluggable() {
         return [
             'slug' => [
@@ -18,5 +23,5 @@ class Manufactuer extends Model
             ]
         ];
     }
-    
+
 }

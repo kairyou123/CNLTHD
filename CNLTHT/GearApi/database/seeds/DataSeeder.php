@@ -41,18 +41,22 @@ class DataSeeder extends Seeder
         $manufactuer->status = "OK";
         $manufactuer->save();
 
-        $product = new Product();
-        $product->name = "Laptop Acer Nitro 5";
-        $product->image = "laptop/acer_nitro_5.jpg";
-        $product->description = "Laptop được ưu chuộng trong năm";
-        $product->price = 15000000;
-        $product->discount = 20;
-        $product->price_discount = $product->price - $product->price * $product->discount / 100;
-        $product->stock = 20;
-        $product->catalog_id = 1;
-        $product->manufactuer_id = 1;
-        $product->status = "OK";
-        $product->save();
+        for ($i = 0; $i < 10; $i++)
+        {
+            $product = new Product();
+            $product->name = "Laptop Acer Nitro 5" . rand(1,50);
+            $product->image = "laptop/acer_nitro_5.jpg";
+            $product->description = "Laptop được ưu chuộng trong năm";
+            $product->price = rand(100000,10000000);
+            $product->discount = rand(10,40);
+            $product->price_discount = $product->price - $product->price * $product->discount / 100;
+            $product->stock = rand(10,40);
+            $product->catalog_id = 1;
+            $product->manufactuer_id = 1;
+            $product->status = "OK";
+            $product->save();
+        }
+
 
     }
 }

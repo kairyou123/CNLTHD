@@ -24,10 +24,28 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('/user', 'UserController@index');
-    Route::get('/user/{user}', 'UserController@show');
-    Route::post('/user', 'UserController@store');
-    Route::put('/user/{id}', 'UserController@update');
-    Route::delete('/user/{user}', 'UserController@destroy');
+    Route::get('/user', 'UserController@index')->middleware('scope:Admin');
+    Route::get('/user/{user}', 'UserController@show')->middleware('scope:Admin');
+    Route::post('/user', 'UserController@store')->middleware('scope:Admin');
+    Route::put('/user/{id}', 'UserController@update')->middleware('scope:Admin');
+    Route::delete('/user/{user}', 'UserController@destroy')->middleware('scope:Admin');
+
+    Route::post('/product', 'ProductController@store')->middleware('scope:Admin');
+    Route::put('/product/{product}', 'ProductController@update')->middleware('scope:Admin');
+    Route::delete('/product/{product}', 'ProductController@destroy')->middleware('scope:Admin');
+
+    Route::post('/catalog', 'CatalogController@store')->middleware('scope:Admin');
+    Route::put('/catalog/{catalog}', 'CatalogController@update')->middleware('scope:Admin');
+    Route::delete('/catalog/{catalog}', 'CatalogController@destroy')->middleware('scope:Admin');
+
+    Route::post('/manufactuer', 'ManufactuerController@store')->middleware('scope:Admin');
+    Route::put('/manufactuer/{manufactuer}', 'ManufactuerController@update')->middleware('scope:Admin');
+    Route::delete('/manufactuer/{manufactuer}', 'ManufactuerController@destroy')->middleware('scope:Admin');
 });
+
+Route::get('/product', 'ProductController@index');
+Route::get('/product/{product}', 'ProductController@show');
+
+Route::get('/catalog', 'CatalogController@index');
+Route::get('/catalog/{catalog}', 'CatalogController@show');
 

@@ -29,7 +29,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         
+        $user_existed = User::where('email', $request->email)->first();
+
+        if($user_existed )
+        {
+            return response()->json([
+                'message' => 'Email Existed'
+            ], 400);
+        }
+
+        $user = new User();
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->role = $request->role;
+        $user->status = $request->status;
+
+        return response()->json([
+            'message' => 'Created successfully'
+        ], 201);
     }
 
     /**
@@ -40,6 +59,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+
         return new UserCollection($user);
     }
 
@@ -54,7 +74,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if(!$user) 
+        if(!$user)
         {
             return response()->json([
                 'message' => 'Not Found User'
@@ -67,7 +87,7 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->status = $request->status;
 
-        if(!$request->password) 
+        if(!$request->password)
         {
             $user->password = bcrypt($request->password);
         }

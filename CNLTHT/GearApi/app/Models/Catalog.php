@@ -11,6 +11,11 @@ class Catalog extends Model
 
     protected $table = 'catalogs';
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function sluggable() {
         return [
             'slug' => [

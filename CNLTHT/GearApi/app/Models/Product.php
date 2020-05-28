@@ -26,6 +26,11 @@ class Product extends Model {
         return $this->belongsToMany('App\Models\User', 'cart', 'product_id', 'user_id');
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function sluggable() {
         return [
             'slug' => [
