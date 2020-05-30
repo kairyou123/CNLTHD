@@ -24,6 +24,7 @@ class ProductCollection extends JsonResource
             'stock' => $this->stock,
             'catalog' => $this->catalog,
             'manufactuer' => $this->manufactuer,
+            'status' => $this->status,
             'slug' => $this->slug,
         ];
     }

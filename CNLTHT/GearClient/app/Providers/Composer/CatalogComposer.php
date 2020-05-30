@@ -26,6 +26,9 @@ class CatalogComposer
     {
         $response = Http::get(env('API_URL') . '/api/catalog');
         $catalogs = $response->json()['data'];
+        $catalogs = collect($catalogs)->filter(function($catalog) {
+            return $catalog['status'] === 'OK';
+        })->toArray();
         $this->catalogs = $catalogs;
 
     }

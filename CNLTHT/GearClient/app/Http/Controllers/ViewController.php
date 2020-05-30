@@ -16,9 +16,14 @@ class ViewController extends Controller
         $response = Http::get(env('API_URL') . '/api/product');
         $products = $response->json();
 
-        $products_new = array_slice(collect($products['data'])->sortBy('created_at')->reverse()->toArray(), 0, 7);
+        $products = collect($products['data'])->filter(function($product) {
+            return $product['status'] === 'OK';
+        })->toArray();
 
-        $products_discount = array_slice(collect($products['data'])->filter(function($product) {
+
+        $products_new = array_slice(collect($products)->sortBy('created_at')->reverse()->toArray(), 0, 7);
+
+        $products_discount = array_slice(collect($products)->filter(function($product) {
             return $product['discount'] > 20;
         })->toArray(), 0, 7);
 
@@ -45,7 +50,7 @@ class ViewController extends Controller
         if($request->page) $page = $request->page;
 
         $products_category = collect($products['data'])->filter(function($product) use ($category) {
-            return $product['catalog']['slug'] === $category['slug'];
+            return ($product['catalog']['slug'] === $category['slug'] && $product['status'] === 'OK');
         })->toArray();
 
 

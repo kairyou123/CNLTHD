@@ -39,8 +39,6 @@ class UserController extends Controller
 
         $expires_at = $response->json()['expires_at'];
         $data = $response->json();
-        $response = Http::withToken($data['access_token'])->get('http://localhost:8000/api/current-user');
-        $data = array_merge($data, ['user' => $response->json()]);
         Cookie::queue(Cookie::make('login', json_encode($data), Carbon::now()->diffInSeconds($expires_at)));
         return redirect()->route('index');
 

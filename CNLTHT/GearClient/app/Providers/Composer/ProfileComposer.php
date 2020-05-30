@@ -26,7 +26,9 @@ class ProfileComposer
     public function __construct()
     {
         if(Cookie::get('login')) {
-            $this->user = json_decode(Cookie::get('login'), true)['user'];
+            $access_token = json_decode(Cookie::get('login'), true)['access_token'];
+            $response = Http::withToken($access_token)->get(env('API_URL') . '/api/current-user');
+            $this->user = $response->json();
         }
 
 
