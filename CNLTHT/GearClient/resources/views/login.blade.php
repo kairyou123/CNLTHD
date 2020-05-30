@@ -20,7 +20,7 @@
         </div>
         <div class="gear-login-common col-7">
             <div class="gear-register">
-                <div>Chưa có tài khoản? <a href="#">Đăng kí</a></div>
+                <div>Chưa có tài khoản? <a href="{{route('register')}}">Đăng kí</a></div>
             </div>
             <div class="gear-input-box" name="login">
                 <div class="gear-label">Đăng nhập</div>

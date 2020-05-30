@@ -38,7 +38,7 @@
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-user"></i></a>
             <div class="dropdown-menu dropleft">
               <a class="dropdown-item" href="{{route('login')}}">Đăng nhập</a>
-              <a class="dropdown-item" href="#">Đăng ký</a>
+              <a class="dropdown-item" href="{{route('register')}}">Đăng ký</a>
             </div>
           </li>
           @else
