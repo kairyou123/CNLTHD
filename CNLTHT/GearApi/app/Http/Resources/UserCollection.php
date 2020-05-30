@@ -22,7 +22,6 @@ class UserCollection extends JsonResource
             'phone' => $this->phone,
             'role' => $this->role,
             'status' => $this->status,
-            'cart' => $this->product_cart
         ];
     }
 }

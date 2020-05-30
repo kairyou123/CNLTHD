@@ -1,6 +1,6 @@
 <div id="menu" class="menu">
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand padding-gear-40" href="index.html">HHL</a>
+      <a class="navbar-brand padding-gear-40" href="/">HHL</a>
       <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Danh mục</a>
             <div class="dropdown-menu">
             @foreach($catalogs as $catalog)
-                <a class="dropdown-item" href="products.html">{{$catalog['name']}}</a>
+            <a class="dropdown-item" href="{{route('category', ['category' => $catalog['slug']])}}">{{$catalog['name']}}</a>
             @endforeach
             </div>
           </li>
@@ -30,26 +30,26 @@
         </div>
         <ul class="navbar-nav mt-2 mt-lg-0">
           <li class="nav-item cart">
-            <div class="count">11</div>
-            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+          <div class="count">{{($cart_count) ? $cart_count : "0"}}</div>
+          <a class="nav-link" href="{{route('cart')}}"><i class="fas fa-shopping-cart"></i></a>
           </li>
           @if(!Cookie::get('login'))
           <li class="nav-item dropdown mr-auto dropleft">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-user"></i></a>
             <div class="dropdown-menu dropleft">
-              <a class="dropdown-item" href="#">Đăng nhập</a>
+              <a class="dropdown-item" href="{{route('login')}}">Đăng nhập</a>
               <a class="dropdown-item" href="#">Đăng ký</a>
             </div>
           </li>
           @else
-            @if($profile->role === "Admin")
+            @if($profile['role'] === "Admin")
                 <li class="nav-item dropdown mr-auto dropleft">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-user"></i></a>
                     <div class="dropdown-menu dropleft">
                     <a class="dropdown-item" href="#">Trang quản lý</a>
                     <a class="dropdown-item" href="#">Thông tin tài khoản</a>
                     <a class="dropdown-item" href="#">Theo dõi đơn hàng</a>
-                    <a class="dropdown-item" href="#">Đăng xuất</a>
+                    <a class="dropdown-item" href="{{route('logout')}}">Đăng xuất</a>
                     </div>
                 </li>
             @else
@@ -58,7 +58,7 @@
                 <div class="dropdown-menu dropleft">
                 <a class="dropdown-item" href="#">Thông tin tài khoản</a>
                 <a class="dropdown-item" href="#">Theo dõi đơn hàng</a>
-                <a class="dropdown-item" href="#">Đăng xuất</a>
+                <a class="dropdown-item" href="{{route('logout')}}">Đăng xuất</a>
                 </div>
             </li>
             @endif

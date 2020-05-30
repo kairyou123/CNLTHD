@@ -14,20 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/current-user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get('/current-user','UserController@currentUser');
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('sign-up', 'AuthController@register');
+    Route::post('/login', 'AuthController@login');
+    Route::post('/sign-up', 'AuthController@register');
+    Route::post('/logout', 'AuthController@logout')->middleware('auth:api');
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/user', 'UserController@index')->middleware('scope:Admin');
     Route::get('/user/{user}', 'UserController@show')->middleware('scope:Admin');
     Route::post('/user', 'UserController@store')->middleware('scope:Admin');
-    Route::put('/user/{id}', 'UserController@update')->middleware('scope:Admin');
+    Route::put('/user/{user}', 'UserController@update')->middleware('scope:Admin');
     Route::delete('/user/{user}', 'UserController@destroy')->middleware('scope:Admin');
 
     Route::post('/product', 'ProductController@store')->middleware('scope:Admin');
@@ -41,6 +40,11 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/manufactuer', 'ManufactuerController@store')->middleware('scope:Admin');
     Route::put('/manufactuer/{manufactuer}', 'ManufactuerController@update')->middleware('scope:Admin');
     Route::delete('/manufactuer/{manufactuer}', 'ManufactuerController@destroy')->middleware('scope:Admin');
+
+    Route::get('/cart', 'CartController@index');
+    Route::post('/cart', 'CartController@store');
+    Route::put('/cart/edit', 'CartController@update');
+    Route::delete('/cart/delete', 'CartController@destroy');
 });
 
 Route::get('/product', 'ProductController@index');

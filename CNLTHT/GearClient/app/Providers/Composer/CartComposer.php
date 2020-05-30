@@ -3,19 +3,18 @@
 namespace App\Providers\Composer;
 
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cookie;
 
-class ProfileComposer
+class CartComposer
 {
     /**
      * The user repository implementation.
      *
      * @var UserRepository
      */
-    protected $user;
+    protected $cart_count;
 
     /**
      * Create a new profile composer.
@@ -26,9 +25,20 @@ class ProfileComposer
     public function __construct()
     {
         if(Cookie::get('login')) {
-            $this->user = json_decode(Cookie::get('login'), true)['user'];
-        }
+            $access_token = json_decode(Cookie::get('login'), true)['access_token'];
 
+            $response = Http::withToken($access_token)->get(env('API_URL') . '/api/cart');
+
+            if($response->json() !== null)
+            {
+                $this->cart_count = count($response->json()['data']);
+            }
+            else
+            {
+                $this->cart_count = 0;
+            }
+
+        }
 
     }
 
@@ -40,6 +50,6 @@ class ProfileComposer
      */
     public function compose(View $view)
     {
-        $view->with('profile', $this->user);
+        $view->with('cart_count', $this->cart_count);
     }
 }

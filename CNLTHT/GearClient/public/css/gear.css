@@ -83,3 +83,22 @@
 .gear-external-box a {
   text-decoration: none;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+.pagination li {
+    display: block;
+}
+
+.carousel-inner img
+{
+    height: 350px;
+}
+
+a:hover{
+    opacity: 0.8;
+}

@@ -23,7 +23,7 @@ class Product extends Model {
     }
 
     public function user_cart() {
-        return $this->belongsToMany('App\Models\User', 'cart', 'product_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'cart', 'product_id', 'user_id')->withPivot('quantity');
     }
 
     public function getRouteKeyName()

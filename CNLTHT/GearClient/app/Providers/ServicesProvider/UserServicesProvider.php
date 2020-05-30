@@ -32,5 +32,9 @@ class UserServicesProvider extends ServiceProvider
         View::composer(
             'header', 'App\Providers\Composer\CatalogComposer'
         );
+
+        View::composer(
+            'header', 'App\Providers\Composer\CartComposer'
+        );
     }
 }

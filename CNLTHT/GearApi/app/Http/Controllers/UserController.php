@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserCollection;
 
 class UserController extends Controller
@@ -18,6 +19,13 @@ class UserController extends Controller
         $users = User::all();
 
         return UserCollection::collection($users);
+    }
+
+    public function currentUser()
+    {
+        $user = Auth::user();
+
+        return $user;
     }
 
 
@@ -35,12 +43,13 @@ class UserController extends Controller
         {
             return response()->json([
                 'message' => 'Email Existed'
-            ], 400);
+            ], 500);
         }
 
         $user = new User();
         $user->email = $request->email;
         $user->name = $request->name;
+        $user->password = bcrypt($request->password);
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->role = $request->role;
@@ -70,16 +79,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::find($id);
-
-        if(!$user)
-        {
-            return response()->json([
-                'message' => 'Not Found User'
-            ], 404);
-        }
 
         $user->name = $request->name;
         $user->address = $request->address;

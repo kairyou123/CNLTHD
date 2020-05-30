@@ -28,6 +28,8 @@
 
     @include('footer')
 
+    @section('script')
+    @show
     <script src="{{ asset('js/swiper.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 </body>

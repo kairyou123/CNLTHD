@@ -1,12 +1,12 @@
-<div class="title-content">
-    <p class="title-content-name">{{ $title }}</p>
-    <p class="title-content-more"><a href="#">Xem thêm</a></p>
+<div class="title-content-index">
+    <p class="title-content-index-name">{{ $title }}</p>
+<p class="title-content-index-more"><a href="#">Xem thêm</a></p>
 </div>
-<div id="content" class="swiper-container content">
+<div id="content" class="swiper-container content-index">
     <div class="swiper-wrapper">
     @foreach($products as $product)
       <div class="swiper-slide">
-        <a href="#product-detail">
+        <a href="{{route('details', ['slug' => $product['slug'] ])}}">
           <div class="products">
             <div class="products-img">
             @if(json_decode($product['image'], true))
@@ -16,15 +16,15 @@
             @endif
               <div class="products-hover">
                 <p class="products-hover-see-more">
-                  <a href="#product-detail">Nhấn để xem chi tiết</a>
+                <a href="{{route('details', ['slug' => $product['slug'] ])}}">Nhấn để xem chi tiết</a>
                 </p>
                 <div class="products-hover-btn">
-                  <p><a href="#">Thêm vào giỏ hàng</a></p>
+                    <p><a href="{{route('add_cart', ['slug' => $product['slug'], 'quantity' => 1])}}">Thêm vào giỏ hàng</a></p>
                 </div>
               </div>
             </div>
             <div class="products-name">
-                <h2>{{$product['name']}}</h2>
+                <h5>{{$product['name']}}</h5>
             </div>
             <div class="products-price">
               <p>{{number_format($product['price'])}} đ</p>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request) 
+    public function login(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password]))
         {
@@ -37,8 +37,6 @@ class AuthController extends Controller
                 ]);
             }
 
-            
-
         }
 
         return response()->json([
@@ -46,15 +44,23 @@ class AuthController extends Controller
         ], 401);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        Auth::logout();
+        if(Auth::check())
+        {
+            Auth::user()->token()->revoke();
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ], 201);
+        }
+
         return response()->json([
-            'message' => 'Successfully logged out'
-        ]);
+            'error' => 'Api went wrong'
+        ], 500);
+
     }
 
-    public function register(Request $request) 
+    public function register(Request $request)
     {
         $email = $request->email;
 
@@ -62,7 +68,7 @@ class AuthController extends Controller
 
         if($userExisted) return response()->json([
             'error' => 'Email đã có người sử dụng'
-        ], 402);
+        ], 500);
 
         $user = new User([
             'name' => $request->name,

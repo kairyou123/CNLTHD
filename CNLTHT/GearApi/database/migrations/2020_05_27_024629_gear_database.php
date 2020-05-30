@@ -48,7 +48,7 @@ class GearDatabase extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->integer('price');
             $table->integer('discount');
             $table->integer('price_discount');
