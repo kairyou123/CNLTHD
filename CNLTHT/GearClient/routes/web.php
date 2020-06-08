@@ -24,7 +24,7 @@ Route::get('/login', 'UserController@login')->name('login')->middleware('checkLo
 Route::post('/login', 'UserController@login_submit');
 Route::get('/logout', 'UserController@logout')->name('logout')->middleware('checkLogin1');
 Route::post('/register', 'UserController@register')->name('register_submit');
-Route::get('/cart/add/{slug}/{quantity}', 'CartController@add')->name('add_cart')->middleware('checkLogin1');
+Route::post('/cart/add/{slug}', 'CartController@add')->name('add_cart')->middleware('checkLogin1');
 Route::post('/cart/edit/{slug}', 'CartController@edit')->name('edit_cart')->middleware('checkLogin1');
 Route::get('/cart/delete/{slug}', 'CartController@delete')->name('delete_cart')->middleware('checkLogin1');
 Route::get('/cookie', 'UserController@ddCookie')->name('cookie');

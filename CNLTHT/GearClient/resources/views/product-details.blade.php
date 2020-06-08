@@ -72,10 +72,14 @@
             </div>
             @endif
             <div class="product-detail-content-products-btn">
-              <p>Số lượng: </p><input type="number" value="1" min="1" max={{$product['stock']}} step="1" class="number" />
+                @if($product['stock'] !== 0)
+                <form method="POST" name="add_cart" action="{{route('add_cart', ['slug' => $product['slug']])}}">
+                    @csrf
+              <p>Số lượng: </p><input type="number" name="quantity" value="1" min="1" max={{$product['stock']}} step="1" class="number" />
               <br>
-              @if($product['stock'] !== 0)
-              <button type="button" class="btn btn-danger btn-lg buy-now">Đặt hàng</button>
+
+              <input type="submit" class="btn btn-danger btn-lg buy-now" forSubmit="add_cart" value="Đặt hàng">
+                </form>
               @else
               <div style="font-size: 22px; color: red; padding-top: 20px"><b>HẾT HÀNG</b></div>
               @endif

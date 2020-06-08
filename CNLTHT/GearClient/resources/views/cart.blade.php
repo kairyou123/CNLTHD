@@ -43,7 +43,7 @@
                         <td class="table-cart--price text-center">{{number_format($product['price_discount'] * $product['pivot']['quantity'])}} đ</td>
                         <td class="table-cart--trash"><button class="btn btn-sm btn-warning" forSubmit="cartEdit"><i class="fas fa-edit"></i></button></td>
                     </form>
-                    <td class="table-cart--trash"><button onClick="deleteCart()" id="deleteCart" data-slug="{{$product['slug']}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
+                    <td class="table-cart--trash"><button onClick="deleteCart(this)" id="deleteCart" slug="{{$product['slug']}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
                         </button></td>
                     </tr>
                     @php($total = $total + $product['price_discount'] * $product['pivot']['quantity'])
@@ -80,13 +80,13 @@
 
 @section('script')
 <script>
-    function deleteCart() {
+    function deleteCart(obj) {
         if(confirm("Bạn có chắc chắn muốn xóa sản phẩm này ra khỏi giỏ hàng?"))
         {
-            var x = document.getElementById('deleteCart').getAttribute("data-slug");
+            var x = obj.getAttribute('slug');
             var url = '{{route('delete_cart', ":slug")}}';
             url = url.replace(':slug', x);
-            window.location = url;
+            window.location.href = url;
         }
     }
 </script>

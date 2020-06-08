@@ -102,3 +102,19 @@
 a:hover{
     opacity: 0.8;
 }
+
+.button_cart {
+    outline: none;
+    background: white;
+    border: none;
+    width: 100%;
+}
+.button_cart:hover {
+    background-color: white;
+    opacity: 0.8;
+}
+.products-hover:hover
+{
+    background-color: white;
+    opacity: 0.8;
+}

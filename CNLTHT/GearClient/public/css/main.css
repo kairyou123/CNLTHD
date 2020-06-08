@@ -179,11 +179,6 @@ body a:hover {
 .content-index .swiper-wrapper .swiper-slide .products-img .products-hover-btn p {
   margin: 0;
 }
-.content-index .swiper-wrapper .swiper-slide .products-img .products-hover-btn:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff !important;
-  font-style: italic;
-}
 .content-index .swiper-wrapper .swiper-slide .products-img .products-hover-btn a:hover {
   color: #fff !important;
 }
@@ -315,11 +310,6 @@ body a:hover {
 }
 .product-category-content-products-img .products-hover-btn p {
   margin: 0;
-}
-.product-category-content-products-img .products-hover-btn:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff !important;
-  font-style: italic;
 }
 .product-category-content-products-img .products-hover-btn a:hover {
   color: #fff !important;

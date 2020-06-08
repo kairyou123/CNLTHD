@@ -39,7 +39,7 @@ class UserController extends Controller
 
         $expires_at = $response->json()['expires_at'];
         $data = $response->json();
-        Cookie::queue(Cookie::make('login', json_encode($data), Carbon::now()->diffInSeconds($expires_at)));
+        Cookie::queue(Cookie::make('login', json_encode($data), Carbon::now()->diffInMinutes($expires_at)));
         return redirect()->route('index');
 
     }

@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
-    public function add($slug, $quantity)
+    public function add($slug, Request $request)
     {
         $data = [
             'slug' => $slug,
-            'quantity' => intval($quantity)
+            'quantity' => intval($request->quantity)
         ];
 
         $access_token = json_decode(Cookie::get('login'), true)['access_token'];

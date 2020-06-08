@@ -19,7 +19,13 @@
                 <a href="{{route('details', ['slug' => $product['slug'] ])}}">Nhấn để xem chi tiết</a>
                 </p>
                 <div class="products-hover-btn">
-                    <p><a href="{{route('add_cart', ['slug' => $product['slug'], 'quantity' => 1])}}">Thêm vào giỏ hàng</a></p>
+
+                    <form method="POST" action="{{route('add_cart', ['slug' => $product['slug']])}}">
+                        @csrf
+                     <input type="hidden" value="1" readonly name="quantity">
+                      <input type="submit" value="Thêm vào giỏ hàng" class="button_cart">
+                    </form>
+
                 </div>
               </div>
             </div>
