@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-@if($products->hasPages())
+@if($products->count() > 0 )
     <div class="container" style="margin-top: 20px; margin-bottom: 20px">
         <x-show-product :products="$products" :type="$category" />
     </div>

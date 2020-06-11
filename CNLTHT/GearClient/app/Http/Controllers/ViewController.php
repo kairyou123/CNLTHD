@@ -44,7 +44,6 @@ class ViewController extends Controller
         }
 
         $category = $response->json()['data'];
-
         $page = 1;
 
         if($request->page) $page = $request->page;
@@ -52,7 +51,6 @@ class ViewController extends Controller
         $products_category = collect($products['data'])->filter(function($product) use ($category) {
             return ($product['catalog']['slug'] === $category['slug'] && $product['status'] === 'OK');
         })->toArray();
-
 
         if($request->price)
         {
