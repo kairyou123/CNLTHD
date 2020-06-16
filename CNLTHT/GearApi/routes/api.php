@@ -53,3 +53,6 @@ Route::get('/product/{product}', 'ProductController@show');
 Route::get('/catalog', 'CatalogController@index');
 Route::get('/catalog/{catalog}', 'CatalogController@show');
 
+Route::get('/manufactuer', 'ManufactuerController@index');
+Route::get('/manufactuer/{manufactuer}', 'ManufactuerController@show');
+
